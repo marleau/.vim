@@ -1,4 +1,6 @@
-Installation:
+## Installation ##
+
+Clone .vim folder:
 
     git clone git://github.com/marleau/.vim.git ~/.vim
 
