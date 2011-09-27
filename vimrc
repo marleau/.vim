@@ -16,7 +16,7 @@ set smartindent         	        " automatically indent lines after opening a br
 set number              	        " show line numbers
 set ruler               	        " show current positions along the bottom
 set showcmd             	        " show the command being typed
-set scrolloff=10        	        " keep 10 lines (top/bottom) for scope
+set scrolloff=8         	        " keep 10 lines (top/bottom) for scope
 set expandtab           	        " expand tabs
 set ts=4                	        " set real tab to 4 spaces
 set sw=4                	        " set shift width to 4 spaces
@@ -31,6 +31,7 @@ set visualbell                      " instead of sound, screen flashes
 "set relativenumber                  " line numbers are relative to current line
 let mapleader=","                   " change the leader from \ to ,
 set autoread                        " reload file when changed externally
+set fdm=marker                      " use markers {{{1 ... }}}1 for folding
 
 " ===================================================================
 " GUI settings
@@ -41,8 +42,9 @@ if has("gui_running")
     set guifont=Andale\ Mono:h12
 	set columns=180
 	set lines=55
-    set guioptions-=T
+    set guioptions-=T               " disable the toolbar
 else
+    colorscheme desert
     set background=dark
 endif
 
@@ -93,25 +95,15 @@ autocmd BufEnter *.html set et ts=4 sw=4 wm=8 nocindent
 " for source code
 autocmd BufEnter *.cpp,*.h,*.c,*.java,*.pl,*.py,*.cu,*.cuh,*.rb set et ts=4 sw=4 cindent
 " if file begins with #! or has bin, make executable on write
-au bufwritepost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod +x <afile> | endif | endif
+au BufWritePost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod +x <afile> | endif | endif
 " for cuda files
 au BufNewFile,BufRead *.cu,*.cuh set ft=cpp
 
-" auto close braces, brackets, parenthesis
-inoremap {      {}<Left>
-inoremap {<CR>  {<CR>}<Esc>O
-inoremap {{     {
-inoremap {}     {}
-
-" inoremap (      ()<Left>
-" inoremap (<CR>  (<CR>)<Esc>O
-" inoremap ((     (
-" inoremap ()     ()
-" 
-" inoremap [      []<Left>
-" inoremap [<CR>  [<CR>]<Esc>O
-" inoremap [[     [
-" inoremap []     []
+" auto close braces
+" inoremap {      {}<Left>
+" inoremap {<CR>  {<CR>}<Esc>O
+" inoremap {{     {
+" inoremap {}     {}
 
 " ===================================================================
 " Plug-in Preferences
@@ -121,7 +113,3 @@ inoremap {}     {}
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
-
-" JavaImp
-let g:JavaImpPaths = $HOME . 'Dropbox/2011 Winter/52/hw3'
-let g:JavaImpDataDir = $HOME . '.vim/bundle/JavaImp/data'
