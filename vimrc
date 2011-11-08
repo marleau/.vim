@@ -1,7 +1,8 @@
 " for pathogen
 filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+call pathogen#infect()
+"call pathogen#runtime_append_all_bundles()
+"call pathogen#helptags()
 filetype plugin indent on           " enable filetype plugin
 
 " ===================================================================
@@ -13,10 +14,8 @@ set nocompatible        	        " no compatibility with vi
 set cpoptions+=$        	        " get the dollar sign, showing where change ends
 set autoindent          	        " automatically indent
 set smartindent         	        " automatically indent lines after opening a bracket in programming languages
-set number              	        " show line numbers
-set ruler               	        " show current positions along the bottom
 set showcmd             	        " show the command being typed
-set scrolloff=8         	        " keep 10 lines (top/bottom) for scope
+set scrolloff=8         	        " keep 8 lines (top/bottom) for scope
 set expandtab           	        " expand tabs
 set ts=4                	        " set real tab to 4 spaces
 set sw=4                	        " set shift width to 4 spaces
@@ -28,10 +27,10 @@ set laststatus=2                    " always show the status line
 set wildmenu                        " turn on commandline completion wild style!
 set wildmode=list:longest           " turn on wild mode huge list
 set visualbell                      " instead of sound, screen flashes
-"set relativenumber                  " line numbers are relative to current line
 let mapleader=","                   " change the leader from \ to ,
 set autoread                        " reload file when changed externally
 set fdm=marker                      " use markers {{{1 ... }}}1 for folding
+set showmatch                       " show matching parenthesis/brackets
 
 " ===================================================================
 " GUI settings
@@ -65,7 +64,7 @@ set hlsearch                        " highlight searches
 set incsearch                       " do incremental search
 set ignorecase                      " ignore case while searching
 set smartcase                       " if search contains uppercase, make case sensitive
-nmap <silent> <c-n> :silent noh<cr> " turn of search highlight
+nmap <silent> <c-h> :silent noh<cr> " turn of search highlight
 
 " ===================================================================
 " Functions
@@ -98,12 +97,6 @@ autocmd BufEnter *.cpp,*.h,*.c,*.java,*.pl,*.py,*.cu,*.cuh,*.rb set et ts=4 sw=4
 au BufWritePost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod +x <afile> | endif | endif
 " for cuda files
 au BufNewFile,BufRead *.cu,*.cuh set ft=cpp
-
-" auto close braces
-" inoremap {      {}<Left>
-" inoremap {<CR>  {<CR>}<Esc>O
-" inoremap {{     {
-" inoremap {}     {}
 
 " ===================================================================
 " Plug-in Preferences
