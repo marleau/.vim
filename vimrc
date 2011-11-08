@@ -52,9 +52,9 @@ endif
 " Keymaps
 " -------------------------------------------------------------------
 
-" jj = esc
-ino jj <esc> " in insert mode, esc
-cno jj <c-c> " in command mode, ctrl+c
+" jk = esc
+ino jk <esc> " in insert mode, esc
+cno jk <c-c> " in command mode, ctrl+c
 
 " ,v opens .vimrc
 " ,vv reloads .vimrc
